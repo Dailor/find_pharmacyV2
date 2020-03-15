@@ -2,10 +2,10 @@ import requests
 import CONST
 
 
-def get_map(p1, p2):
-    p1, p2 = map(lambda x: map(str, x), (p1, p2))
+def get_map(points):
+    points_string = "~".join([f"{pos[0]},{pos[1]},pm{cl}s" for pos, cl in points])
     params = {
         'l': 'map',
-        'pt': f"{','.join(p1)},pmwtm1~{','.join(p2)},pmwtm1"}
+        'pt': points_string}
     r = requests.get(CONST.API_STATIC_MAP, params)
     return r
